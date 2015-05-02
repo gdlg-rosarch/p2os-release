@@ -1,0 +1,52 @@
+ros-indigo-p2os-driver (1.0.11-1trusty) trusty; urgency=high
+
+
+
+ -- Hunter Allen <hunter.allen@vanderbilt.edu>  Wed, 25 Jun 2014 04:00:00 -0000
+
+ros-indigo-p2os-driver (1.0.10-1trusty) trusty; urgency=high
+
+
+
+ -- Hunter Allen <hunter.allen@vanderbilt.edu>  Wed, 28 May 2014 04:00:00 -0000
+
+ros-indigo-p2os-driver (1.0.9-1trusty) trusty; urgency=high
+
+  * Updated version
+  * 1.0.7
+  * Updated changelogs
+
+ -- Hunter Allen <hunter.allen@vanderbilt.edu>  Sun, 18 Aug 2013 04:00:00 -0000
+
+ros-indigo-p2os-driver (1.0.7-1trusty) trusty; urgency=high
+
+  * Updated to match hmt-git.com repository
+
+ -- Hunter Allen <hunter.allen@vanderbilt.edu>  Sun, 18 Aug 2013 04:00:00 -0000
+
+ros-indigo-p2os-driver (1.0.5-1trusty) trusty; urgency=high
+
+  * Syncing github with hmt-git.com repository
+
+ -- Hunter Allen <hunter.allen@vanderbilt.edu>  Tue, 23 Jul 2013 04:00:00 -0000
+
+ros-indigo-p2os-driver (1.0.1-1trusty) trusty; urgency=high
+
+  * Updating to match hmt-git.com repo
+  * Added forgotten dependencies
+  * Added package dependencies
+  * Updated C++ Code
+  * Updated package.xml
+  * Updated CMakeLists.txt
+  * Updated CMakeLists.txt
+  * Added message header files
+  * Remapped the files to the right headers
+  * cleaned up include directory
+  * Updated the main driver to use catkin
+  * Added covariance to Odometry msg.
+  * Modified the CMakeLists.txt file.
+  * added the code
+
+ -- Hunter Allen <hunter.allen@vanderbilt.edu>  Mon, 22 Jul 2013 04:00:00 -0000
+
+
