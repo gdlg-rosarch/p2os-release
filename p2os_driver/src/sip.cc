@@ -29,9 +29,9 @@
 #include <stdlib.h> /* for abs() */
 #include <unistd.h>
 
-#include <p2os_driver/sip.h>
-#include <tf/tf.h>
-#include <tf/transform_datatypes.h>
+#include "../include/sip.h"
+#include "tf/tf.h"
+#include "tf/transform_datatypes.h"
 #include <sstream>
 #include <boost/assign/list_of.hpp>
 
@@ -64,8 +64,8 @@ void SIP::FillStandard(ros_p2os_data_t* data)
   }
 
   // timestamps get set in the p2os::StandardSIPPutData fcn
-  data->position.header.frame_id = odom_frame_id;
-  data->position.child_frame_id = base_link_frame_id;
+  data->position.header.frame_id = "odom";
+  data->position.child_frame_id = "base_link";
 
   data->position.pose.pose.position.x = px;
   data->position.pose.pose.position.y = py;

@@ -23,12 +23,12 @@
 
 #include <iostream>
 
-#include <ros/ros.h>
-#include <geometry_msgs/Pose.h>
-#include <geometry_msgs/PoseStamped.h>
-#include <p2os_driver/p2os.h>
-#include <p2os_msgs/MotorState.h>
-#include <tf/transform_datatypes.h>
+#include "ros/ros.h"
+#include "geometry_msgs/Pose.h"
+#include "geometry_msgs/PoseStamped.h"
+#include <p2os.h>
+#include <MotorState.h>
+#include "tf/transform_datatypes.h"
 
 int main( int argc, char** argv )
 {
@@ -79,8 +79,8 @@ int main( int argc, char** argv )
   {
     ROS_WARN( "p2os shutdown failed... your robot might be heading for the wall?" );
   }
-  delete p; //delete pointer
 
   ROS_INFO( "Quitting... " );
   return 0;
+
 }

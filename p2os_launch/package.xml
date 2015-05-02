@@ -1,7 +1,7 @@
 <package>
   <name>p2os_launch</name>
-  <version>2.0.0</version>
-  <description>Launch and config files designed for use with the p2os stack.</description>
+  <version>1.0.10</version>
+  <description>This package contains launch and config files designed for use with the p2os stack.</description>
   <!-- <maintainer>Edward</maintainer> -->
 
   <license>BSD</license>
@@ -9,9 +9,9 @@
   <url type="website">http://ros.org/wiki/p2os-vanderbilt</url>
   <!-- <url type="bugtracker"></url> -->
 
-  <maintainer email="allen286@purdue.edu">Hunter Allen</maintainer>
+  <maintainer email="hunter.allen@vanderbilt.edu">Hunter Allen</maintainer>
 
-  <author email="allen286@purdue.edu">Hunter Allen</author>
+  <author email="hunter.allen@Vanderbilt.edu">Hunter Allen</author>
   <author email="dfseifer@usc.edu">David Feil-Seifer</author>
   <author>Brian Gerkey</author>
   <author>Kasper Stoy</author>

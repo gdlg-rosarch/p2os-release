@@ -22,7 +22,7 @@
  */
 
 #include <ros/ros.h>
-#include <p2os_driver/p2os.h>
+#include "../include/p2os.h"
 
 #include <termios.h>
 #include <fcntl.h>
@@ -31,21 +31,14 @@
 
 P2OSNode::P2OSNode( ros::NodeHandle nh ) :
     n(nh), gripper_dirty_(false),
-    batt_pub_( n.advertise<p2os_msgs::BatteryState>("battery_state",1000),
+    batt_pub_( n.advertise<p2os_driver::BatteryState>("battery_state",1000),
                diagnostic_,
                diagnostic_updater::FrequencyStatusParam( &desired_freq, &desired_freq, 0.1),
                diagnostic_updater::TimeStampStatusParam() ),
     ptz_(this)
 {
-  /*! \brief Constructor for P2OS node.
-   *   
-   *  This brings up the P2OS system for ROS operation.
-   */
-
   // Use sonar
   ros::NodeHandle n_private("~");
-  n_private.param(std::string("odom_frame_id"), odom_frame_id,std::string("odom"));
-  n_private.param(std::string("base_link_frame_id"), base_link_frame_id,std::string("base_link"));
   n_private.param("use_sonar", use_sonar_, false);
 
   // read in config options
@@ -102,14 +95,13 @@ P2OSNode::P2OSNode( ros::NodeHandle nh ) :
   desired_freq = 10;
 
   // advertise services
-  pose_pub_ = n.advertise<nav_msgs::Odometry>("pose", 1000);
-  //advertise topics
-  mstate_pub_ = n.advertise<p2os_msgs::MotorState>("motor_state",1000);
-  grip_state_pub_ = n.advertise<p2os_msgs::GripperState>("gripper_state",1000);
-  ptz_state_pub_ = n.advertise<p2os_msgs::PTZState>("ptz_state",1000);
-  sonar_pub_ = n.advertise<p2os_msgs::SonarArray>("sonar", 1000);
-  aio_pub_ = n.advertise<p2os_msgs::AIO>("aio", 1000);
-  dio_pub_ = n.advertise<p2os_msgs::DIO>("dio", 1000);
+  pose_pub_ = n.advertise<nav_msgs::Odometry>("pose",1000);
+  mstate_pub_ = n.advertise<p2os_driver::MotorState>("motor_state",1000);
+  grip_state_pub_ = n.advertise<p2os_driver::GripperState>("gripper_state",1000);
+  ptz_state_pub_ = n.advertise<p2os_driver::PTZState>("ptz_state",1000);
+  sonar_pub_ = n.advertise<p2os_driver::SonarArray>("sonar", 1000);
+  aio_pub_ = n.advertise<p2os_driver::AIO>("aio", 1000);
+  dio_pub_ = n.advertise<p2os_driver::DIO>("dio", 1000);
 
   // subscribe to services
   cmdvel_sub_ = n.subscribe("cmd_vel", 1, &P2OSNode::cmdvel_cb, this);
@@ -133,13 +125,15 @@ P2OSNode::~P2OSNode()
 {
 }
 
-void P2OSNode::cmdmotor_state( const p2os_msgs::MotorStateConstPtr &msg)
+void
+P2OSNode::cmdmotor_state( const p2os_driver::MotorStateConstPtr &msg)
 {
   motor_dirty = true;
   cmdmotor_state_ = *msg;
 }
 
-void P2OSNode::check_and_set_motor_state()
+void
+P2OSNode::check_and_set_motor_state()
 {
   if( !motor_dirty ) return;
   motor_dirty = false;
@@ -158,7 +152,8 @@ void P2OSNode::check_and_set_motor_state()
   SendReceive(&packet,false);
 }
 
-void P2OSNode::check_and_set_gripper_state()
+void
+P2OSNode::check_and_set_gripper_state()
 {
   if( !gripper_dirty_ ) return;
   gripper_dirty_ = false;
@@ -186,7 +181,8 @@ void P2OSNode::check_and_set_gripper_state()
   SendReceive(&lift_packet,false);
 }
 
-void P2OSNode::cmdvel_cb( const geometry_msgs::TwistConstPtr &msg)
+void
+P2OSNode::cmdvel_cb( const geometry_msgs::TwistConstPtr &msg)
 {
 
   if( fabs( msg->linear.x - cmdvel_.linear.x ) > 0.01 || fabs( msg->angular.z-cmdvel_.angular.z) > 0.01 )
@@ -209,7 +205,8 @@ void P2OSNode::cmdvel_cb( const geometry_msgs::TwistConstPtr &msg)
 
 }
 
-void P2OSNode::check_and_set_vel()
+void
+P2OSNode::check_and_set_vel()
 {
   if( !vel_dirty ) return;
 
@@ -266,13 +263,14 @@ void P2OSNode::check_and_set_vel()
   }
 }
 
-void P2OSNode::gripperCallback(const p2os_msgs::GripperStateConstPtr &msg)
+void P2OSNode::gripperCallback(const p2os_driver::GripperStateConstPtr &msg)
 {
   gripper_dirty_ = true;
   gripper_state_ = *msg;
 }
 
-int P2OSNode::Setup()
+int
+P2OSNode::Setup()
 {
   int i;
   int bauds[] = {B9600, B38400, B19200, B115200, B57600};
@@ -511,8 +509,6 @@ int P2OSNode::Setup()
   if(!sippacket)
   {
     sippacket = new SIP(param_idx);
-    sippacket->odom_frame_id = odom_frame_id;
-    sippacket->base_link_frame_id = base_link_frame_id;
   }
 /*
   sippacket->x_offset = 0;
@@ -658,7 +654,8 @@ int P2OSNode::Setup()
   return(0);
 }
 
-int P2OSNode::Shutdown()
+int
+P2OSNode::Shutdown()
 {
   unsigned char command[20],buffer[20];
   P2OSPacket packet;
@@ -725,7 +722,8 @@ P2OSNode::StandardSIPPutData(ros::Time ts)
 }
 
 /* send the packet, then receive and parse an SIP */
-int P2OSNode::SendReceive(P2OSPacket* pkt, bool publish_data)
+int
+P2OSNode::SendReceive(P2OSPacket* pkt, bool publish_data)
 {
   P2OSPacket packet;
 
@@ -785,12 +783,14 @@ int P2OSNode::SendReceive(P2OSPacket* pkt, bool publish_data)
   return(0);
 }
 
-void P2OSNode::updateDiagnostics()
+void
+P2OSNode::updateDiagnostics()
 {
   diagnostic_.update();
 }
 
-void P2OSNode::check_voltage( diagnostic_updater::DiagnosticStatusWrapper &stat )
+void
+P2OSNode::check_voltage( diagnostic_updater::DiagnosticStatusWrapper &stat )
 {
 	double voltage = sippacket->battery / 10.0;
 	if( voltage < 11.0 )
@@ -807,7 +807,8 @@ void P2OSNode::check_voltage( diagnostic_updater::DiagnosticStatusWrapper &stat 
 	stat.add("voltage", voltage );
 }
 
-void P2OSNode::check_stall( diagnostic_updater::DiagnosticStatusWrapper &stat )
+void
+P2OSNode::check_stall( diagnostic_updater::DiagnosticStatusWrapper &stat )
 {
 	if( sippacket->lwstall || sippacket->rwstall )
 	{
@@ -819,7 +820,8 @@ void P2OSNode::check_stall( diagnostic_updater::DiagnosticStatusWrapper &stat )
 	stat.add("right wheel stall", sippacket->rwstall );
 }
 
-void P2OSNode::ResetRawPositions()
+void
+P2OSNode::ResetRawPositions()
 {
   P2OSPacket pkt;
   unsigned char p2oscommand[4];
@@ -839,7 +841,8 @@ void P2OSNode::ResetRawPositions()
 }
 
 /* toggle sonars on/off, according to val */
-void P2OSNode::ToggleSonarPower(unsigned char val)
+void
+P2OSNode::ToggleSonarPower(unsigned char val)
 {
   unsigned char command[4];
   P2OSPacket packet;
@@ -852,12 +855,9 @@ void P2OSNode::ToggleSonarPower(unsigned char val)
   SendReceive(&packet,false);
 }
 
-/*! \brief Toggle motors on/off.
- *  
- *  Turn on/off the robots in accordance to val.
- *  @param val Determines what state the motor should be. 1 = enabled, 0 = disabled.
- */
-void P2OSNode::ToggleMotorPower(unsigned char val)
+/* toggle motors on/off, according to val */
+void
+P2OSNode::ToggleMotorPower(unsigned char val)
 {
   unsigned char command[4];
   P2OSPacket packet;
@@ -876,7 +876,6 @@ void P2OSNode::ToggleMotorPower(unsigned char val)
 /////////////////////////////////////////////////////
 
 // Ticks to degrees from the ARIA software
-//! Convert ticks to degrees.
 inline double P2OSNode::TicksToDegrees (int joint, unsigned char ticks)
 {
   if ((joint < 0) || (joint >= sippacket->armNumJoints))
@@ -893,7 +892,6 @@ inline double P2OSNode::TicksToDegrees (int joint, unsigned char ticks)
 }
 
 // Degrees to ticks from the ARIA software
-//! convert degrees to ticks
 inline unsigned char P2OSNode::DegreesToTicks (int joint, double degrees)
 {
   double val;
@@ -915,21 +913,18 @@ inline unsigned char P2OSNode::DegreesToTicks (int joint, double degrees)
     return static_cast<int> (round (val));
 }
 
-//! Convert ticks to radians
 inline double P2OSNode::TicksToRadians (int joint, unsigned char ticks)
 {
   double result = DTOR (TicksToDegrees (joint, ticks));
   return result;
 }
 
-//! Convert radians to ticks.
 inline unsigned char P2OSNode::RadiansToTicks (int joint, double rads)
 {
   unsigned char result = static_cast<unsigned char> (DegreesToTicks (joint, RTOD (rads)));
   return result;
 }
 
-//! Convert radians per second to radians per encoder tick.
 inline double P2OSNode::RadsPerSectoSecsPerTick (int joint, double speed)
 {
   double degs = RTOD (speed);
@@ -944,7 +939,6 @@ inline double P2OSNode::RadsPerSectoSecsPerTick (int joint, double speed)
   return secsPerTick;
 }
 
-//! Convert Seconds per encoder tick to radians per second.
 inline double P2OSNode::SecsPerTicktoRadsPerSec (int joint, double msecs)
 {
   double ticksPerSec = 1.0 / (static_cast<double> (msecs) / 1000.0);
