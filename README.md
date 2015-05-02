@@ -1,3 +1,30 @@
+## p2os (groovy) - 2.0.0-0
+
+The packages in the `p2os` repository were released into the `groovy` distro by running `/usr/bin/bloom-release p2os --track groovy --rosdistro groovy` on `Sat, 02 May 2015 23:08:44 -0000`
+
+These packages were released:
+- `p2os_doc`
+- `p2os_driver`
+- `p2os_launch`
+- `p2os_msgs`
+- `p2os_teleop`
+- `p2os_urdf`
+
+Version of package(s) in repository `p2os`:
+- upstream repository: https://github.com/allenh1/p2os
+- release repository: https://github.com/allenh1/p2os-release.git
+- rosdistro version: `1.0.9-0`
+- old version: `1.0.10-0`
+- new version: `2.0.0-0`
+
+Versions of tools used:
+- bloom version: `0.5.20`
+- catkin_pkg version: `0.2.8`
+- rosdep version: `0.11.2`
+- rosdistro version: `0.4.2`
+- vcstools version: `0.1.36`
+
+
 ## p2os (groovy) - 1.0.10-0
 
 The packages in the `p2os` repository were released into the `groovy` distro by running `/usr/bin/bloom-release p2os --track groovy --rosdistro groovy` on `Sat, 02 May 2015 23:01:42 -0000`
