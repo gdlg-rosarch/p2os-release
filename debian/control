@@ -1,0 +1,12 @@
+Source: ros-jade-p2os-doc
+Section: misc
+Priority: extra
+Maintainer: Hunter Allen <hunter.allen@vanderbilt.edu>
+Build-Depends: debhelper (>= 9.0.0), ros-jade-catkin
+Homepage: http://ros.org/wiki/p2os_msgs
+Standards-Version: 3.9.2
+
+Package: ros-jade-p2os-doc
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, 
+Description: Contains the Documentation for the p2os driver/componenets
