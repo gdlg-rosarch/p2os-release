@@ -29,32 +29,45 @@
 #include <iostream>
 #include <string.h>
 
-#include "packet.h"
-#include "robot_params.h"
+#include <p2os_driver/packet.h>
+#include <p2os_driver/robot_params.h>
 
-#include "ros/ros.h"
-#include "nav_msgs/Odometry.h"
-#include "geometry_msgs/Twist.h"
+#include <ros/ros.h>
+#include <nav_msgs/Odometry.h>
+#include <geometry_msgs/Twist.h>
 #include <tf/transform_broadcaster.h>
-#include <BatteryState.h>
-#include <MotorState.h>
-#include <GripperState.h>
-#include <SonarArray.h>
-#include <DIO.h>
-#include <AIO.h>
+#include <p2os_msgs/BatteryState.h>
+#include <p2os_msgs/MotorState.h>
+#include <p2os_msgs/GripperState.h>
+#include <p2os_msgs/SonarArray.h>
+#include <p2os_msgs/DIO.h>
+#include <p2os_msgs/AIO.h>
 
 #include <diagnostic_updater/publisher.h>
 #include <diagnostic_updater/diagnostic_updater.h>
 
+/*! \brief Container struct.
+ *  
+ *  Create a struct that holds the 
+ *  Robot's sensors.
+ */
 typedef struct ros_p2os_data
 {
+    //! Provides the position of the robot
     nav_msgs::Odometry  position;
-    p2os_driver::BatteryState batt;
-    p2os_driver::MotorState motors;
-    p2os_driver::GripperState gripper;
-    p2os_driver::SonarArray sonar;
-    p2os_driver::DIO dio;
-    p2os_driver::AIO aio;
+    //! Provides the battery voltage
+    p2os_msgs::BatteryState batt;
+    //! Provides the state of the motors (enabled or disabled)
+    p2os_msgs::MotorState motors;
+    //! Provides the state of the gripper
+    p2os_msgs::GripperState gripper;
+    //! Container for sonar data
+    p2os_msgs::SonarArray sonar;
+    //! Digital In/Out
+    p2os_msgs::DIO dio;
+    //! Analog In/Out
+    p2os_msgs::AIO aio;
+    //! Transformed odometry frame.
     geometry_msgs::TransformStamped odom_trans;
 } ros_p2os_data_t;
 
@@ -72,12 +85,19 @@ class SIP;
 
 class P2OSNode
 {
+    /*! \brief P2OS robot driver node.
+     *
+     *  This class contains, essentially, the main means of communication
+     *  between the robot and ROS.
+     */
   public:
     P2OSNode( ros::NodeHandle n );
     virtual ~P2OSNode();
 
   public:
+    //! Setup the robot for use. Communicates with the robot directly.
     int Setup();
+    //! Prepare for shutdown.
     int Shutdown();
 
     int SendReceive(P2OSPacket* pkt, bool publish_data = true );
@@ -102,10 +122,10 @@ class P2OSNode
     void cmdvel_cb( const geometry_msgs::TwistConstPtr &);
 
     void check_and_set_motor_state();
-    void cmdmotor_state( const p2os_driver::MotorStateConstPtr &);
+    void cmdmotor_state( const p2os_msgs::MotorStateConstPtr &);
 
     void check_and_set_gripper_state();
-    void gripperCallback(const p2os_driver::GripperStateConstPtr &msg);
+    void gripperCallback(const p2os_msgs::GripperStateConstPtr &msg);
     double get_pulse() {return pulse;}
 
 		// diagnostic messages
@@ -113,14 +133,17 @@ class P2OSNode
 		void check_stall( diagnostic_updater::DiagnosticStatusWrapper &stat );
 
   protected:
+    //! Node Handler used for publication of data.
     ros::NodeHandle n;
+    //! Node Handler used for private data publication.
     ros::NodeHandle nh_private;
  
     diagnostic_updater::Updater diagnostic_;
 
-    diagnostic_updater::DiagnosedPublisher<p2os_driver::BatteryState> batt_pub_;
-    ros::Publisher pose_pub_, mstate_pub_, grip_state_pub_,
+    diagnostic_updater::DiagnosedPublisher<p2os_msgs::BatteryState> batt_pub_;
+    ros::Publisher mstate_pub_, grip_state_pub_,
       ptz_state_pub_, sonar_pub_, aio_pub_, dio_pub_;
+    ros::Publisher pose_pub_;
     ros::Subscriber cmdvel_sub_, cmdmstate_sub_, gripper_sub_, ptz_cmd_sub_;
 
     tf::TransformBroadcaster odom_broadcaster;
@@ -129,6 +152,8 @@ class P2OSNode
     SIP* sippacket;
     std::string psos_serial_port;
     std::string psos_tcp_host;
+    std::string odom_frame_id;
+    std::string base_link_frame_id;
     int         psos_fd;
     bool        psos_use_tcp;
     int         psos_tcp_port;
@@ -138,26 +163,44 @@ class P2OSNode
     // PID settings
     int rot_kp, rot_kv, rot_ki, trans_kp, trans_kv, trans_ki;
 
+    //! Stall I hit a wall?
     int bumpstall; // should we change the bumper-stall behavior?
+    //! Use Joystick?
     int joystick;
+    //! Control wheel velocities individually?
     int direct_wheel_vel_control;
     int radio_modemp;
 
+    //! Maximum motor speed in Meters per second.
     int motor_max_speed;
+    //! Maximum turn speed in radians per second.
     int motor_max_turnspeed;
-    short motor_max_trans_accel, motor_max_trans_decel;
-    short motor_max_rot_accel, motor_max_rot_decel;
-    double pulse; // Pulse time
+    //! Maximum translational acceleration in Meters per second per second.
+    short motor_max_trans_accel;
+    //! Minimum translational acceleration in Meters per second per second.
+    short motor_max_trans_decel;
+    //! Maximum rotational acceleration in radians per second per second.
+    short motor_max_rot_accel;
+    //! Minimum rotational acceleration in Meters per second per second.
+    short motor_max_rot_decel;
+    //! Pulse time
+    double pulse;
     double desired_freq;
-    double lastPulseTime; // Last time of sending a pulse or command to the robot
+    //! Last time the node received or sent a pulse.
+    double lastPulseTime;
+    //! Use the sonar array?
     bool use_sonar_;
 
     P2OSPtz ptz_;
 
   public:
+    //! Command Velocity subscriber
     geometry_msgs::Twist cmdvel_;
-    p2os_driver::MotorState    cmdmotor_state_;
-    p2os_driver::GripperState gripper_state_;
+    //! Motor state publisher
+    p2os_msgs::MotorState  cmdmotor_state_;
+    //! Gripper state publisher
+    p2os_msgs::GripperState gripper_state_;
+    //! sensor data container
     ros_p2os_data_t p2os_data;
 };
 
