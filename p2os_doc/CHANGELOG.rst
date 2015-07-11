@@ -2,6 +2,19 @@
 Changelog for package p2os_doc
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.0.1 (2015-07-11)
+------------------
+* Forgot to update my email on p2os_doc's package.xml file. Oops. It's better now.
+* Contributors: Hunter Allen
+
+1.0.13 (2015-05-02)
+-------------------
+
+1.0.12 (2014-06-25)
+-------------------
+* Updated to match indigo-devel
+* Contributors: Hunter Allen
+
 1.0.11 (2014-06-25)
 -------------------
 * Added documentation package. Currently just the p2os_driver. Also removed a line in p2os_launch cmake list.
