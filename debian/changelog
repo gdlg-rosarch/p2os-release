@@ -1,0 +1,63 @@
+ros-indigo-p2os-msgs (1.0.11-3saucy) saucy; urgency=high
+
+  * Fixed dependency issues and cleaned up package.xml and CMakeLists.txt for p2os_driver and p2os_msgs
+  * Separated p2os_driver and p2os_msgs
+  * Contributors: Aris Synodinos
+
+ -- Hunter Allen <hunter.allen@vanderbilt.edu>  Wed, 25 Jun 2014 04:00:00 -0000
+
+ros-indigo-p2os-msgs (1.0.10-3saucy) saucy; urgency=high
+
+
+
+ -- Hunter Allen <hunter.allen@vanderbilt.edu>  Wed, 28 May 2014 04:00:00 -0000
+
+ros-indigo-p2os-msgs (1.0.9-3saucy) saucy; urgency=high
+
+
+
+ -- Hunter Allen <hunter.allen@vanderbilt.edu>  Sun, 18 Aug 2013 04:00:00 -0000
+
+ros-indigo-p2os-msgs (1.0.7-3saucy) saucy; urgency=high
+
+
+
+ -- Hunter Allen <hunter.allen@vanderbilt.edu>  Sat, 03 Aug 2013 04:00:00 -0000
+
+ros-indigo-p2os-msgs (1.0.6-3saucy) saucy; urgency=high
+
+
+
+ -- Hunter Allen <hunter.allen@vanderbilt.edu>  Sat, 27 Jul 2013 04:00:00 -0000
+
+ros-indigo-p2os-msgs (1.0.5-3saucy) saucy; urgency=high
+
+
+
+ -- Hunter Allen <hunter.allen@vanderbilt.edu>  Tue, 23 Jul 2013 20:31:00 -0000
+
+ros-indigo-p2os-msgs (1.0.4-3saucy) saucy; urgency=high
+
+
+
+ -- Hunter Allen <hunter.allen@vanderbilt.edu>  Tue, 23 Jul 2013 18:32:00 -0000
+
+ros-indigo-p2os-msgs (1.0.2-3saucy) saucy; urgency=high
+
+
+
+ -- Hunter Allen <hunter.allen@vanderbilt.edu>  Tue, 23 Jul 2013 13:17:00 -0000
+
+ros-indigo-p2os-msgs (1.0.1-3saucy) saucy; urgency=high
+
+
+
+ -- Hunter Allen <hunter.allen@vanderbilt.edu>  Mon, 22 Jul 2013 04:00:00 -0000
+
+ros-indigo-p2os-msgs (1.0.0-3saucy) saucy; urgency=high
+
+
+
+ -- Hunter Allen <hunter.allen@vanderbilt.edu>  Tue, 18 Jun 2013 16:26:00 -0000
+
+
