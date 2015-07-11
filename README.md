@@ -1,3 +1,30 @@
+## p2os (indigo) - 1.0.11-3
+
+The packages in the `p2os` repository were released into the `indigo` distro by running `/usr/lib/python-exec/python2.7/bloom-release p2os --track indigo --rosdistro indigo` on `Sat, 11 Jul 2015 07:19:09 -0000`
+
+These packages were released:
+- `p2os_doc`
+- `p2os_driver`
+- `p2os_launch`
+- `p2os_msgs`
+- `p2os_teleop`
+- `p2os_urdf`
+
+Version of package(s) in repository `p2os`:
+- upstream repository: https://github.com/allenh1/p2os
+- release repository: https://github.com/allenh1/p2os-release.git
+- rosdistro version: `1.0.11-2`
+- old version: `1.0.11-2`
+- new version: `1.0.11-3`
+
+Versions of tools used:
+- bloom version: `0.5.20`
+- catkin_pkg version: `0.2.9`
+- rosdep version: `0.11.2`
+- rosdistro version: `0.4.2`
+- vcstools version: `0.1.36`
+
+
 ## p2os (hydro) - 2.0.0-0
 
 The packages in the `p2os` repository were released into the `hydro` distro by running `/usr/bin/bloom-release p2os --track hydro --ros-distro hydro` on `Tue, 05 May 2015 03:18:28 -0000`
