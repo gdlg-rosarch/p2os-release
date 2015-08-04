@@ -1,3 +1,30 @@
+## p2os (indigo) - 2.0.2-0
+
+The packages in the `p2os` repository were released into the `indigo` distro by running `/usr/lib/python-exec/python2.7/bloom-release --rosdistro indigo --track indigo p2os --edit` on `Tue, 04 Aug 2015 11:50:46 -0000`
+
+These packages were released:
+- `p2os_doc`
+- `p2os_driver`
+- `p2os_launch`
+- `p2os_msgs`
+- `p2os_teleop`
+- `p2os_urdf`
+
+Version of package(s) in repository `p2os`:
+- upstream repository: https://github.com/allenh1/p2os
+- release repository: https://github.com/allenh1/p2os-release.git
+- rosdistro version: `1.0.11-3`
+- old version: `1.0.11-3`
+- new version: `2.0.2-0`
+
+Versions of tools used:
+- bloom version: `0.5.20`
+- catkin_pkg version: `0.2.9`
+- rosdep version: `0.11.2`
+- rosdistro version: `0.4.2`
+- vcstools version: `0.1.36`
+
+
 ## p2os (jade) - 2.0.2-0
 
 The packages in the `p2os` repository were released into the `jade` distro by running `/usr/lib/python-exec/python2.7/bloom-release p2os --track jade --rosdistro jade` on `Tue, 04 Aug 2015 11:34:08 -0000`
