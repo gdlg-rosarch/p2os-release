@@ -1,0 +1,12 @@
+Source: ros-jade-p2os-urdf
+Section: misc
+Priority: extra
+Maintainer: Hunter Allen <allen286@purdue.edu>
+Build-Depends: debhelper (>= 9.0.0), ros-jade-catkin, ros-jade-geometry-msgs, ros-jade-sensor-msgs, ros-jade-std-msgs, ros-jade-tf, ros-jade-urdf
+Homepage: http://ros.org/wiki/p2os-purdue
+Standards-Version: 3.9.2
+
+Package: ros-jade-p2os-urdf
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-jade-geometry-msgs, ros-jade-sensor-msgs, ros-jade-std-msgs, ros-jade-tf, ros-jade-urdf
+Description: URDF file descriptions for P2OS/ARCOS robot
