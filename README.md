@@ -1,3 +1,32 @@
+## p2os (jade) - 2.0.5-0
+
+The packages in the `p2os` repository were released into the `jade` distro by running `/usr/bin/bloom-release p2os --track jade --rosdistro jade` on `Thu, 26 May 2016 16:08:01 -0000`
+
+These packages were released:
+- `p2os_doc`
+- `p2os_driver`
+- `p2os_launch`
+- `p2os_msgs`
+- `p2os_teleop`
+- `p2os_urdf`
+
+Version of package(s) in repository `p2os`:
+
+- upstream repository: https://github.com/allenh1/p2os
+- release repository: https://github.com/allenh1/p2os-release.git
+- rosdistro version: `2.0.4-0`
+- old version: `2.0.4-0`
+- new version: `2.0.5-0`
+
+Versions of tools used:
+
+- bloom version: `0.5.21`
+- catkin_pkg version: `0.2.10`
+- rosdep version: `0.11.4`
+- rosdistro version: `0.4.7`
+- vcstools version: `0.1.38`
+
+
 ## p2os (kinetic) - 2.0.4-0
 
 The packages in the `p2os` repository were released into the `kinetic` distro by running `/usr/bin/bloom-release p2os --track kinetic --rosdistro kinetic` on `Thu, 26 May 2016 12:08:24 -0000`
