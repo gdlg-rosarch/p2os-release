@@ -2,6 +2,9 @@
 Changelog for package p2os_urdf
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.0.4 (2016-05-26)
+------------------
+
 2.0.3 (2015-10-25)
 ------------------
 * Updated p2os_urdf's build dependencies. Fixes `#39 <https://github.com/allenh1/p2os/issues/39>`_
