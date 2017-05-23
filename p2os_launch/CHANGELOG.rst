@@ -2,6 +2,11 @@
 Changelog for package p2os_launch
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.0.6 (2017-05-22)
+------------------
+* Added an enable motors launch file.
+* Contributors: Hunter L. Allen
+
 2.0.5 (2016-05-26)
 ------------------
 
