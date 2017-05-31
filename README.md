@@ -1,3 +1,32 @@
+## p2os (lunar) - 2.0.7-0
+
+The packages in the `p2os` repository were released into the `lunar` distro by running `/usr/bin/bloom-release -r lunar -t lunar p2os` on `Wed, 31 May 2017 00:58:02 -0000`
+
+These packages were released:
+- `p2os_doc`
+- `p2os_driver`
+- `p2os_launch`
+- `p2os_msgs`
+- `p2os_teleop`
+- `p2os_urdf`
+
+Version of package(s) in repository `p2os`:
+
+- upstream repository: https://github.com/allenh1/p2os
+- release repository: https://github.com/allenh1/p2os-release.git
+- rosdistro version: `2.0.6-3`
+- old version: `2.0.6-3`
+- new version: `2.0.7-0`
+
+Versions of tools used:
+
+- bloom version: `0.5.26`
+- catkin_pkg version: `0.3.3`
+- rosdep version: `0.11.5`
+- rosdistro version: `0.6.2`
+- vcstools version: `0.1.39`
+
+
 ## p2os (lunar) - 2.0.6-3
 
 The packages in the `p2os` repository were released into the `lunar` distro by running `/usr/bin/bloom-release -r lunar -t lunar p2os` on `Wed, 31 May 2017 00:23:27 -0000`
