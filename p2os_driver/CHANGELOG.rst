@@ -2,6 +2,18 @@
 Changelog for package p2os_driver
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.0.7 (2017-05-30)
+------------------
+* Made a small change to prepare version bump.
+* Updated changelog.
+* Missed a paren.
+* Fixed compiler error.
+* Contributors: Hunter L. Allen
+
+* Missed a paren.
+* Fixed compiler error.
+* Contributors: Hunter L. Allen
+
 2.0.6 (2017-05-22)
 ------------------
 
