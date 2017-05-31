@@ -2,6 +2,17 @@
 Changelog for package p2os_launch
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.0.7 (2017-05-30)
+------------------
+* Updated changelog.
+* merged.
+* Updated package metadata, as well as added the correct c++ flags to the urdf file (for Gentoo support).
+* Contributors: Hunter L. Allen
+
+* merged.
+* Updated package metadata, as well as added the correct c++ flags to the urdf file (for Gentoo support).
+* Contributors: Hunter L. Allen
+
 2.0.6 (2017-05-22)
 ------------------
 * Added an enable motors launch file.
