@@ -1,32 +1,51 @@
 # Script generated with Bloom
-pkgdesc="ROS - @(Description)"
-@[if Homepage and Homepage != '']url='@(Homepage)'@[end if]
+pkgdesc="ROS - Driver file descriptions for P2OS/ARCOS robot"
+url='http://ros.org/wiki/p2os_driver'
 
-pkgname='@(Package)'
-pkgver='@(Version)_@(Pkgrel)'
+pkgname='ros-lunar-p2os-driver'
+pkgver='2.1.0_1'
 pkgrel=1
 arch=('any')
-license=(@[for p in Licenses]'@p'@\n@[end for])
+license=('BSD'
+)
 
-makedepends=(@[for p in BuildDepends]'@p'@\n@[end for])
+makedepends=('ros-lunar-catkin'
+'ros-lunar-diagnostic-updater'
+'ros-lunar-geometry-msgs'
+'ros-lunar-kdl-parser'
+'ros-lunar-nav-msgs'
+'ros-lunar-p2os-msgs'
+'ros-lunar-roscpp'
+'ros-lunar-std-msgs'
+'ros-lunar-tf'
+)
 
-depends=(@[for p in Depends]'@p'@\n@[end for])
+depends=('ros-lunar-diagnostic-updater'
+'ros-lunar-geometry-msgs'
+'ros-lunar-kdl-parser'
+'ros-lunar-message-runtime'
+'ros-lunar-nav-msgs'
+'ros-lunar-p2os-msgs'
+'ros-lunar-roscpp'
+'ros-lunar-std-msgs'
+'ros-lunar-tf'
+)
 
-conflicts=(@[for p in Conflicts]'@p'@\n@[end for])
-replaces=(@[for p in Replaces]'@p'@\n@[end for])
+conflicts=()
+replaces=()
 
-_dir=@(Name)
+_dir=p2os_driver
 source=()
 md5sums=()
 
 prepare() {
-    cp -R $startdir/@(Name) $srcdir/@(Name)
+    cp -R $startdir/p2os_driver $srcdir/p2os_driver
 }
 
 build() {
   # Use ROS environment variables
   source /usr/share/ros-build-tools/clear-ros-env.sh
-  [ -f /opt/ros/@(ROSDistribution)/setup.bash ] && source /opt/ros/@(ROSDistribution)/setup.bash
+  [ -f /opt/ros/lunar/setup.bash ] && source /opt/ros/lunar/setup.bash
 
   # Create build directory
   [ -d ${srcdir}/build ] || mkdir ${srcdir}/build
@@ -39,7 +58,7 @@ build() {
   cmake ${srcdir}/${_dir} \
         -DCMAKE_BUILD_TYPE=Release \
         -DCATKIN_BUILD_BINARY_PACKAGE=ON \
-        -DCMAKE_INSTALL_PREFIX=/opt/ros/@(ROSDistribution) \
+        -DCMAKE_INSTALL_PREFIX=/opt/ros/lunar \
         -DPYTHON_EXECUTABLE=/usr/bin/python2 \
         -DPYTHON_INCLUDE_DIR=/usr/include/python2.7 \
         -DPYTHON_LIBRARY=/usr/lib/libpython2.7.so \
